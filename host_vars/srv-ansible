@@ -1,0 +1,4 @@
+local_users: [ djule, gantech ]
+local_fs: 
+# - { lv: test, mp: /test, size: 600m, owner: speypelat, group: admin, mode: "0755" }
+ - { lv: toto, mp: /toto, size: 250m, owner: speypelat, group: admin, mode: "0777" }

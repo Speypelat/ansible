@@ -1,0 +1,20 @@
+---
+
+- hosts: all                                                                                                          
+  remote_user: speypelat
+  become : yes
+  become_method: sudo
+  vars:
+      my_user: "{{ users }}"
+      my_group: "{{ admin }}"
+
+  tasks:
+  - name: copy du bash profile dans le /home directory des users
+    copy:
+      src: /var/ansible/files/.bash_profile
+      dest: /home/{{ my_users }}/.bash_profile
+      owner: "{{ my_users }}"
+      group: "{{ my_group }}"
+      mode: 0640  
+
+...

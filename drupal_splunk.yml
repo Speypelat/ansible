@@ -1,0 +1,58 @@
+---
+
+## modification de la configuration rsyslog et poru le user splunk prerequis DRUPAL ##
+
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+## deploiement de la configuration de drupal.conf
+  task:
+  - name: Configuration du drupal.conf
+    copy:
+       src: /ansible/drupal.conf
+       dest: /etc/rsyslog.d/drupal.conf
+       owner: root
+       groupe: root
+       mode: 0640
+
+## deploiement de la configuration de drupal.conf
+  task:
+  - name: Configuration du drupal.conf
+    copy:
+       src: /ansible/drupal.conf
+       dest: /etc/rsyslog.d/drupal.conf
+       owner: root
+       groupe: root
+       mode: 0640
+
+# Uncomment de l'écoute TCP sur le port 514 pour RSYSLOG
+  - name: Uncomment ModLoad IMTCP
+    replace:
+         dest: /etc/rsyslog.conf
+         backup: yes
+         regexp: "^[#] [$]ModLoad imtcp"
+         replace: "$ModLoad imtcp"
+
+
+# Uncomment de l'écoute TCP sur le port 514 pour RSYSLOG
+  - name: Uncomment ModLoad IMTCP
+    replace:
+         dest: /etc/rsyslog.conf
+         backup: yes
+         regexp: "^[#] [$]InputTCPServerRun 514"
+         replace: "$InputTCPServerRun 514"
+
+#Mise en place des ACL pour dsplunk
+  - name: mise en place des ACL pour le user sur le FS
+    shell: /usr/bin/setfacl -R -m u:dsplunk:r-X /dn-tech/log
+
+#Restart du daemon pour prise en charge du service rsyslog
+  - name: Restart du service Rsyslog.service
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: rsyslog.service
+
+...

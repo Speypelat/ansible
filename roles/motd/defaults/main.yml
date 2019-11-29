@@ -1,0 +1,5 @@
+---
+template_src: /var/ansible/roles/motd/files/motd2
+template_dest: /etc/motd
+company_name: SII CANADA
+...

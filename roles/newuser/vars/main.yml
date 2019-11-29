@@ -1,0 +1,53 @@
+---
+
+users:
+  speypelat:
+    uid: 1000
+    group: admin
+    groups: users
+    home: /home/speypelat
+    gecos: Simon PEYPELAT
+    createhome: yes
+    shell: /bin/bash
+    pubkey_options: ''
+
+  
+  jmakayambungu:
+    uid: 1001
+    group: admin
+    groups: users
+    home: /home/jmakayambungu
+    gecos: John MAKAYA MBUNGU
+    createhome: yes
+    shell: /bin/bash
+    pubkey_options: ''
+
+  djule:
+    uid: 1002
+    group: admin
+    groups: users
+    shell: /bin/bash
+    home: /home/djule
+    gecos: Damien Jule
+    createhome: yes
+    pubkey_option: ''
+
+  toto:
+   uid: 1003
+   group: admin
+   groups: users
+   shell: /bin/bash
+   home: /home/toto
+   gecos: toto test
+   createhome: yes
+   pubkey_option: ''
+
+  gantech:
+   uid: 1004
+   group: admin
+   groups: users
+   shell: /bin/bash
+   home: /home/gantech
+   createhome: yes
+   pubkey_option: ''
+

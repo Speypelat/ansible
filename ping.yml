@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+  remote_user: speypelat
+  gather_facts: false
+  tasks:
+    - ping:

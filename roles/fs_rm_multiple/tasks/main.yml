@@ -1,0 +1,10 @@
+---
+
+- name: suppresion du FS
+  include_tasks: rm_fs.yml 
+  vars:    
+       fs_mp: "{{ item.mp }}" 
+       lv_fs: "{{ item.lv }}"
+  with_items: "{{ fs_list }}"
+
+...

@@ -1,0 +1,14 @@
+---
+
+- name: create fs
+  include_tasks: create_fs.yml 
+  vars:    
+       fs_mp: "{{ item.mp }}" 
+       fs_size: "{{ item.size }}" 
+       fs_owner: "{{ item.owner }}" 
+       fs_group: "{{ item.group }}" 
+       fs_mode: "{{ item.mode }}"
+       lv_fs: "{{ item.lv }}"
+  with_items: "{{ fs_list }}"
+
+...

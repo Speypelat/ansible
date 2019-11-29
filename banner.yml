@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+  remote_user: speypelat
+  become: yes
+  become_method: sudo
+  roles:
+     - role: motd
+
+...

@@ -1,0 +1,34 @@
+---
+
+- name: create user
+  tags: newuser
+  user:
+    name: "{{ item }}"
+    uid: "{{ users[ item ].uid }}"
+    group: "{{ users[ item ].group }}"
+    groups: "{{ users[ item ].groups }}"
+    shell: "{{ users[ item ].shell }}"
+    createhome: "{{ users[ item ].createhome }}"
+    home: "{{ users[ item ].home }}"
+  with_items: "{{ newusers }}"
+
+- name: set public key
+  tags: newuser
+  authorized_key:
+    user: "{{ item }}"
+    state: present
+    key: "{{ lookup('file', item + '.key') }}"
+    #    key_options: "{{ users[ item ].pubkey_options }}"
+  with_items: "{{ newusers }}"
+
+
+  #- name: set public key
+  #  tags: newuser
+  #  authorized_key:
+  #    user: "{{ item }}"
+  #    state: present
+  #    key: "{{lookup('file', item + '.key') }}"
+  #    key_options: "{{ users[ item ].pubkey_options }}"
+  #  with_items: "{{ newusers }}"
+
+...

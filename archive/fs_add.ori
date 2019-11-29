@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  tasks:
+  - name: create group by os
+    group_by:
+      key: "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}"
+                      
+  remote_user: speypelat
+  become: yes
+  become_method: sudo
+  roles:
+   # - role: fs_add_multiple
+   - { role: fs_add_multiple, fs_add_multiple: "{{ local_fs }}" }
+
+...
+

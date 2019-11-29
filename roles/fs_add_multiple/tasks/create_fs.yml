@@ -1,0 +1,50 @@
+---
+
+- set_fact:
+   to_lvm: "{{ fs_mp }}"
+
+- name: recuperation du nom du VG
+  shell: /sbin/vgs -o vg_name --no-headings | tr -d " "
+  register: vgname
+
+- name: create lv
+  lvol:
+    vg: "{{ vgname.stdout }}"
+    lv: "{{ lv_fs }}"
+    size: "{{ fs_size }}"
+  ignore_errors: yes
+
+
+- name: create mount point
+  file:
+    path: "{{ fs_mp }}"
+    state: directory
+
+- name: format fs
+  filesystem:
+    fstype: xfs     
+          #fstype: "{{ fstype_value }}"
+    dev: "/dev/{{ vgname.stdout }}/{{ lv_fs }}"
+    resizefs: yes
+    shrink: no
+    # environnement:
+    #PATH: $PATH:/usr/sbin
+  ignore_errors: yes
+
+- name: Mount FS
+  mount:
+    name: "{{ fs_mp }}"
+    src: "/dev/{{ vgname.stdout }}/{{ lv_fs }}"
+    #    fstype: "{{ fstype_value }}"
+    fstype: 'xfs'
+    state: mounted
+
+- name: Set mode
+  file:
+    path: "{{ fs_mp }}"      
+    owner: "{{ fs_owner }}"      
+    group: "{{ fs_group }}"      
+    mode: "{{ fs_mode }}"      
+    state: directory
+
+...    

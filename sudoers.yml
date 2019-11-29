@@ -1,0 +1,12 @@
+---
+
+
+
+
+  become_method: sudo
+    roles:
+     - { role: sudoers, sudoers: "{{ local_users }}" }
+
+
+
+...

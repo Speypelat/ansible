@@ -1,0 +1,7 @@
+---
+
+- name: demontage du point de montage
+  mount: 
+  state: absent
+
+...

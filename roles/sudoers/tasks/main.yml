@@ -1,0 +1,12 @@
+---
+
+
+- name: copy template sudoers
+  template:
+    src: /var/ansible/roles/sudoers/templates/{{ local_user }}
+    dest: /etc/sudoers.d/{{ local_user }}
+    mode: 0440
+    validate: '/usr/sbin/visudo -cf %s'
+
+...
+
