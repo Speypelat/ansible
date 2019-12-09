@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  remote_user: speypelat
+  become: yes
+  become_method: sudo
+  tasks:
+  roles:
+  - { role: sudoers, sudoers: "{{ local_users }}" }
+...
