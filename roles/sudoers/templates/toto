@@ -1,2 +1,3 @@
-#toto	ALL=(ALL) 	ALL
-#includedir /etc/sudoers.d
+User_Alias TOTO = toto
+Cmnd_Alias STATUS = /usr/bin/systemctl status firewalld
+TOTO ALL=(ALL) NOPASSWD: STATUS
