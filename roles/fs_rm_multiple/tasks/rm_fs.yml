@@ -1,7 +1,27 @@
 ---
 
+- name: recuperation du nom du VG
+  shell: /sbin/vgs -o vg_name --no-headings | tr -d " "
+  register: vgname
+      
+
 - name: demontage du point de montage
-  mount: 
-  state: absent
+  mount:
+    path: "{{ item.mp }}"      
+    state: absent
+
+
+- name: suppression du lv lié au point de montage
+  lvol:
+    vg: "{{ vgname.stdout }}"
+    lv: "{{ item.lv }}"
+    state: absent
+    force: yes
+
+
+- name: suppression du point de montage lié au FS
+  file:
+    path: "{{ item.mp }}"
+    state: absent
 
 ...
