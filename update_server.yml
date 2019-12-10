@@ -1,7 +1,7 @@
 ---
 # Aide pour executer le playbook
 # ansible-playbook update_server.yml --extra-vars "packages=nomdupackage" --limit server 
-# exemple: ansible-playbook update_server.yml --extra-vars "packages=nmap-ncat.x86_64" --limit
+# exemple: ansible-playbook update_server.yml --extra-vars "packages=nmap-ncat,vim" --limit
 
 - hosts: all
   remote_user: speypelat
