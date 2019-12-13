@@ -1,0 +1,23 @@
+## playbook de mise en place de limites dans la configuration limit.conf
+## ansible-playbook limits.yml --extra-vars "user=speypelat" --limit srv-ansible
+## modification des limites en fonction du user, ajout des  limites dans la partie with_items
+
+
+- hosts: all
+  remote_user: speypelat
+  become: yes
+  become_method: sudo
+  vars:
+      my_user: "{{ user }}"
+
+  tasks:
+  - name : modification des limites du user du limits.conf
+    pam_limits:
+      domain: "{{ my_user }}"
+      limit_type: '-'
+      limit_item: "{{ item.name }}"
+      value: "{{ item.number }}"
+  
+    with_items:
+      - { name: 'nofile', number: '65000' } 
+
