@@ -4,7 +4,7 @@
 
 * banner.yml : playbook de déploiement de banner sur des serveurs
 * copy_bash_profile.yml : playbook de déploiement de profiles pour certains utilisateurs su plusieurs serveurs
-* deploy-vms.yml : <strong>en phase de dev</strong> playbook de création d'environnement sur vcenter.
+* deploy-vms.yml : <strong>[en phase de dev]</strong> playbook de création d'environnement sur vcenter.
 * drupal_splunk.yml: deploiement et configuration rsyslog pour users spécifiques.
 * fs_add.yml : playbook de création de FS à partir d'un fichier plat en indiquant le point de montage.
 * fs_rm.yml : playbook de suprression de FS à partir d'un fichier plat en indiquant le FS à supprimer.
