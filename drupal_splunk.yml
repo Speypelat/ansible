@@ -1,6 +1,6 @@
 ---
 
-## modification de la configuration rsyslog et poru le user splunk prerequis DRUPAL ##
+## modification de la configuration rsyslog et pour le user splunk prerequis DRUPAL ##
 
 - hosts: all
   become: yes
