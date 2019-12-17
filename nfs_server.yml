@@ -1,0 +1,45 @@
+---
+# Exemple : ansible-playbook nfs_server.yml --limit srv-ansible --extra-vars "export='/nfs tatoine(rw,sync)'"
+
+- hosts: all
+  remote_user: speypelat
+  become: yes
+  become_method: sudo
+  vars: 
+      my_export: "{{ export }}"
+
+  roles:
+   - { role: fs_add_multiple, fs_list: "{{ local_nfs }}" }
+  tasks:
+# Installation des packages nécéssaires    
+  - name: Installation des packages necessaires
+    yum:
+      name: nfs-utils
+      state: present
+    ignore_errors: yes
+
+# Activation des differents service et ouverture firewall pour la partie NFS Server
+  - name: Activation des serivces NFS partie Serveur
+    systemd:
+      enabled: yes      
+      state: restarted
+      name: nfs-server.service
+
+# Mise en place des informations de client nfs pour l'export
+  - name: mise en place de la configuration d'export nfs
+    lineinfile:
+      path: /etc/exports
+      line: "{{ my_export }}"   
+
+# Export du point de montage
+  - name: export des fs pour montage NFS
+    shell: /usr/sbin/exportfs -avr
+
+# Restart des services NFS
+  - name: restart du service NFS
+    systemd:
+      state: restarted
+      name: nfs-server.service
+
+
+...
